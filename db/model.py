@@ -5,18 +5,20 @@ from sqlalchemy import Enum
 
 Base = declarative_base()
 
-class Parent(Base):
-    __tablename__ = 'parent'
-    id = Column(Integer, primary_key=True)
-    children = relationship("Child", lazy="joined")
+class Association(Base):
+    __tablename__ = "association"
+    left_id = Column(ForeignKey("left.id"), primary_key=True)
+    right_id = Column(ForeignKey("right.id"), primary_key=True)
+    extra_data = Column(String(50))
+    child = relationship("Child")
 
-    def __repr__(self):
-        return f''
+
+class Parent(Base):
+    __tablename__ = "left"
+    id = Column(Integer, primary_key=True)
+    children = relationship("Association")
 
 
 class Child(Base):
-    __tablename__ = 'child'
+    __tablename__ = "right"
     id = Column(Integer, primary_key=True)
-
-    def __repr__(self):
-        return f''
