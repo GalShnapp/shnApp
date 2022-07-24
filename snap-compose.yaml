@@ -1,0 +1,24 @@
+version: "3.7"
+
+# here you do a list of services to build (folders in main mono-repo)
+# To build use docker-compose build -f SHNAPP/snap-compose.yaml
+
+services:
+  serviceA:
+    build: /app #<PATH TO 1st Service>
+    image: <dockerhub user>/<dockerhub Repo> # container used for this service on docker-compose up 
+    container_name: build123 # container tag for this service on docker-compose build 
+    env_file:
+      - ~/envfiles.env # env to containers , also available on build 
+    restart: always # if you want it to restart on errors
+    expose:
+      - 8080 #ports 
+  serviceB:
+    build: #<PATH TO 1st Service>
+    image: <dockerhub user>/<dockerhub Repo> # container used for this service on docker-compose up 
+    container_name: build123 # container tag for this service on docker-compose build 
+    env_file:
+      - ~/envfiles.env # env to containers , also available on build 
+    restart: always # if you want it to restart on errors
+    expose:
+      - 2810 #ports 
