@@ -6,9 +6,9 @@ from db.model import Parent, Child, Association
 from db.engine import get_sandbox_db_transaction
 from logging.config import dictConfig
 import logging
-from app.logconfig import LogConfig
+from logconfig import LogConfig
 
-app = FastAPI(debug=True)
+app = FastAPI()
 
 dictConfig(LogConfig().dict())
 logger = logging.getLogger("mycoolapp")
