@@ -2,11 +2,11 @@ from copy import deepcopy
 import logging
 import uvicorn
 from fastapi import FastAPI
-from db.model import Parent, Child, Association
-from db.engine import get_sandbox_db_transaction
+from app.db_connectors.model import Parent, Child, Association
+from app.db_connectors.engine import get_sandbox_db_transaction
 from logging.config import dictConfig
 import logging
-from logconfig import LogConfig
+from .logconfig import LogConfig
 
 app = FastAPI()
 
@@ -65,6 +65,3 @@ async def create_new_child_for_parent(parrent_id: int):
         cid = a.right_id
     return {"message": f"Hello new child. Your child id is {cid}"}
 
-
-if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000)

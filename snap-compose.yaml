@@ -7,18 +7,24 @@ services:
   serviceA:
     build: /app #<PATH TO 1st Service>
     image: <dockerhub user>/<dockerhub Repo> # container used for this service on docker-compose up 
-    container_name: build123 # container tag for this service on docker-compose build 
+    container_name: shnapplication # container tag for this service on docker-compose build 
     env_file:
-      - ~/envfiles.env # env to containers , also available on build 
+      - /app/.env # env to containers , also available on build 
     restart: always # if you want it to restart on errors
     expose:
       - 8080 #ports 
-  serviceB:
-    build: #<PATH TO 1st Service>
-    image: <dockerhub user>/<dockerhub Repo> # container used for this service on docker-compose up 
-    container_name: build123 # container tag for this service on docker-compose build 
+  db:
+    build: /db
+    image: postgres:14.1-alpine # add <dockerhub-account>/ container used for this service on docker-compose up  if needed
+    container_name: db-14.1 # container tag for this service on docker-compose build
+    volumes: 
+      - db:/var/lib/postgresql/data
     env_file:
-      - ~/envfiles.env # env to containers , also available on build 
+      - /db/.env # env to containers , also available on build 
     restart: always # if you want it to restart on errors
     expose:
-      - 2810 #ports 
+      - 5432 #ports
+
+volumes:
+  db:
+    driver: local
