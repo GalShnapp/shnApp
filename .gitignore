@@ -127,3 +127,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# secret_store
+*secret_store*
+
+# dump
+dump
