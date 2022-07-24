@@ -1,12 +1,15 @@
 from copy import deepcopy
+from sqlalchemy.orm import Session
 import logging
 import uvicorn
-from fastapi import FastAPI
+from fastapi import Depends, FastAPI, HTTPException
 from app.db_connectors.model import Parent, Child, Association
+
 from app.db_connectors.engine import get_sandbox_db_transaction
 from logging.config import dictConfig
 import logging
 from .logconfig import LogConfig
+from crud import get_children_of_parent
 
 app = FastAPI()
 
@@ -19,13 +22,13 @@ async def root():
     return {"message": "Hello World"}
 
 @app.get("/get_children_ids/{parent_id}")
-async def get_children_ids(parrent_id: int):
+async def get_children_ids(parent_id: int, db: Session = Depends(get_sandbox_db_transaction)):
     _p = None
     l = None
     with get_sandbox_db_transaction() as transaction:
-        p = transaction.query(Association).filter(Association.left_id == parrent_id).all()
+        p = transaction.query(Association).filter(Association.left_id == parent_id).all()
         l = [(assoc.extra_data, assoc.child) for assoc in p]
-    return [a[1].id for a in l]
+    return {"old": [a[1].id for a in l], "new": [a for a in get_children_of_parent(db=db, parent_id=parent_id)]}
 
 @app.get("/get_parent_id/{child_id}")
 async def get_parent_id(child_id: int):
