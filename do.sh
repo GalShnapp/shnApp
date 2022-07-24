@@ -17,5 +17,7 @@ SANDBOX_DB_NAME=sandbox \
 SANDBOX_DB_HOST=localhost \
 SANDBOX_DB_SCHEMA=sandbox" > app/.env
 
+ls -s secret_store/secret_store.py app/app/db_connectors
+
 docker-compose build
 docker-compose up
