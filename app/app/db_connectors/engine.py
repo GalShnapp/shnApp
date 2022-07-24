@@ -7,12 +7,12 @@ from typing import ContextManager
 import os
 
 try:
-    from .secret_store import SANDBOX_DB_USERNAME, SANDBOX_DB_PASSWORD, SANDBOX_DB_SCHEMA, SANDBOX_DB_HOST
+    from secret_store import SANDBOX_DB_USERNAME, SANDBOX_DB_PASSWORD, SANDBOX_DB_SCHEMA, SANDBOX_DB_HOST
 except:
-    SANDBOX_DB_USERNAME = os.environ.get("SANDBOX_DB_USERNAME", 'None')
-    SANDBOX_DB_PASSWORD = os.environ.get("SANDBOX_DB_PASSWORD", 'None')
-    SANDBOX_DB_SCHEMA = os.environ.get("SANDBOX_DB_SCHEMA", 'None')
-    SANDBOX_DB_HOST = os.environ.get("SANDBOX_DB_HOST", 'None')
+    SANDBOX_DB_USERNAME = os.environ.get("SANDBOX_DB_USERNAME", None)
+    SANDBOX_DB_PASSWORD = os.environ.get("SANDBOX_DB_PASSWORD", None)
+    SANDBOX_DB_SCHEMA = os.environ.get("SANDBOX_DB_SCHEMA", None)
+    SANDBOX_DB_HOST = os.environ.get("SANDBOX_DB_HOST", None)
 
 CONNECTION_STRING = str(URL('postgresql+psycopg2',
                             username=SANDBOX_DB_USERNAME,
