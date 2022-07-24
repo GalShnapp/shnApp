@@ -65,3 +65,5 @@ async def create_new_child_for_parent(parrent_id: int):
         cid = a.right_id
     return {"message": f"Hello new child. Your child id is {cid}"}
 
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000)
