@@ -36,7 +36,9 @@ def get_sandbox_db_transaction() -> ContextManager[Session]:
     session = session_maker()
     try:
         yield session
-    except:
+    except Exception as e:
+        print("exceptions suck")
+        print(e)
         session.rollback()
     finally:
         session.close()

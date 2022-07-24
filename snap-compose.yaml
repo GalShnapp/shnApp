@@ -9,7 +9,7 @@ services:
     image: <dockerhub user>/<dockerhub Repo> # container used for this service on docker-compose up 
     container_name: shnapplication # container tag for this service on docker-compose build 
     env_file:
-      - /app/.env # env to containers , also available on build 
+      - /app/app/.env # env to containers , also available on build 
     restart: always # if you want it to restart on errors
     expose:
       - 8080 #ports 
