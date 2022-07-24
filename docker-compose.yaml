@@ -1,0 +1,29 @@
+version: "3.7"
+
+# here you do a list of services to build (folders in main mono-repo)
+# To build use docker-compose build -f SHNAPP/snap-compose.yaml
+
+services:
+  app:
+    build: app #<PATH TO 1st Service>
+    # image: galshnapp/<dockerhub Repo> # container used for this service on docker-compose up 
+    container_name: shnapplication # container tag for this service on docker-compose build 
+    env_file:
+      - app/.env # env to containers , also available on build 
+    restart: always # if you want it to restart on errors
+    expose:
+      - 8080 #ports 
+  db:
+    image: postgres:14.1-alpine # add <dockerhub-account>/ container used for this service on docker-compose up  if needed
+    container_name: db-14.1 # container tag for this service on docker-compose build
+    volumes: 
+      - db:/var/lib/postgresql/data
+    env_file:
+      - db/.env # env to containers , also available on build 
+    restart: always # if you want it to restart on errors
+    expose:
+      - 5432 #ports
+
+volumes:
+  db:
+    driver: local
