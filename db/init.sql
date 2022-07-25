@@ -1,6 +1,4 @@
-CREATE USER docker;
-CREATE DATABASE docker;
-GRANT ALL PRIVILEGES ON DATABASE docker TO docker;
-
 CREATE DATABASE sandbox;
-CREATE SCHEMA IF NOT EXISTS sandbox;
+\c sandbox;
+CREATE SCHEMA sandbox;
+SET search_path TO sandbox,public;

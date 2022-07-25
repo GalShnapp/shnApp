@@ -1,20 +1,16 @@
-echo start 
-pwd 
-ls -l 
-cd app/ 
+#!bin/sh
+set -e
+echo slowly migrating 
 
-echo step2 
-pwd 
-ls -l 
-cd app/ 
+cd app/
 
-echo step3 
-pwd 
-ls -l 
+echo app
+
 cd db_connectors/
 
-echo "and now we wait ....."
+echo db_connectors
+echo going to sleep 10 seconds
 sleep 10 
 
-echo step-alembic  
+echo step alembic
 alembic upgrade head

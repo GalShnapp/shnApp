@@ -1,20 +1,14 @@
-#!bin/sh
+#!bin/bash
 set -e
-echo start 
-pwd 
-ls -l 
-cd app/
+
+_wd=$(pwd)
+echo slowly migrating 
+cd app/db_connectors/
 
 
-echo step2 
-pwd 
-ls -l 
-cd db_connectors/
-
-echo "\n\n\nand now we wait .....\n\n\n"
-sleep 10 
-
-echo step-alembic  
+echo step alembic
 alembic upgrade head
+
+cd $_wd
 
 uvicorn app.app:app --host 0.0.0.0 --port 80
