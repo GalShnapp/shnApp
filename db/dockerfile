@@ -11,6 +11,3 @@ ENV POSTGRES_PASSWORD=POSTGRES_PASSWORD
 # COPY mig_db.sh docker-entrypoint-initdb.d/mig_db.sh
 COPY init.sql docker-entrypoint-initdb.d/
 
-# RUN [ "pwd" ]
-# RUN [ "ls -l" ]
-# RUN   ["cat db/mig_db.sh >> docker-entrypoint-initdb.d/mig_db.sh "]
