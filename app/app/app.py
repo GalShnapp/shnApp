@@ -36,6 +36,7 @@ async def get_parent_id(child_id: int):
 @app.post("/new_parent")
 async def create_new_parent():
     p = Parent()
+    pid = 0
     with get_sandbox_db_transaction() as transaction:
         transaction.add(p)
         transaction.commit()

@@ -24,7 +24,7 @@ CONNECTION_STRING = str(URL('postgresql+psycopg2',
 
 def get_sandbox_db_engine():
     return create_engine(CONNECTION_STRING, connect_args={
-        'options': f'-csearch_path={SANDBOX_DB_SCHEMA}'
+        'options': f'-c search_path={SANDBOX_DB_SCHEMA}'
     })
 
 def get_sandbox_db_session() -> Session:
